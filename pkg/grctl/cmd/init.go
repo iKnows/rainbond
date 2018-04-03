@@ -113,9 +113,9 @@ func NewCmdInstallStatus() cli.Command {
 }
 
 func initCluster(c *cli.Context) error {
-	url := "http://repo.goodrain.com/release/3.5/gaops/jobs/install/prepare/init.sh"
+	url := "http://repo.goodrain.com/release/salt/init.sh"
 	if c.Bool("test") {
-		url = "http://dev.repo.goodrain.com/gaops/jobs/install/prepare/init.sh"
+		url = "http://dev.repo.goodrain.com/release/salt/init.sh"
 	}
 	resp, err := http.Get(url)
 

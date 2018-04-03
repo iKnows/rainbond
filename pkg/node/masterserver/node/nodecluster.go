@@ -369,7 +369,7 @@ func (n *NodeCluster) checkNodeInstall(node *model.HostNode) {
 			etcd = strings.Join(etcdConfig.Value.([]string), ",")
 		}
 	}
-	initshell := "repo.goodrain.com/release/3.5/gaops/jobs/install/prepare/init.sh"
+	initshell := "repo.goodrain.com/release/salt/init.sh"
 	etcd = etcd + ","
 	cmd := fmt.Sprintf("bash -c \"set %s %s %s;$(curl -s %s)\"", node.ID, etcd, role, initshell)
 	logrus.Infof("init endpoint node cmd is %s", cmd)
