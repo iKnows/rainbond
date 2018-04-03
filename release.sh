@@ -33,23 +33,14 @@ release_desc=${branch_info}-${VERSION}-${buildRelease}
 function prepare() {
 	rm -rf $releasedir
     mkdir -pv $releasedir/{tmp,dist}
-    path=$PWD
-    #git clone $gaops  $releasedir/tmp
-    [ ! -d "$distdir/usr/local/" ] && mkdir -p $distdir/usr/local/bin
-    [ ! -d "$distdir/usr/share/gr-rainbond-node/gaops/" ] && mkdir -pv $distdir/usr/share/gr-rainbond-node/gaops
-    cd $releasedir/tmp
-    cp -a $path$gaopsdir/* ./
-    tar zcf  ../dist/usr/share/gr-rainbond-node/gaops/gaops.tgz ./ 
-    cd $path
-    rm -rf $releasedir/tmp
 }
 
 function build() {
 	echo "---> Build Binary For ACP"
 	echo "acp plugins version:$release_desc"
 	# sed -i "s/0.0.0/$release_desc/g" ./cmd/version.go
-	echo "build rainbond-node"
-    docker run --rm -v `pwd`:${WORK_DIR} -w ${WORK_DIR} -it golang:1.8.3 go build -ldflags '-w -s'  -o $releasedir/dist/usr/local/bin/${BASE_NAME}-node ./cmd/node
+#	echo "build rainbond-node"
+    #docker run --rm -v `pwd`:${WORK_DIR} -w ${WORK_DIR} -it golang:1.8.3 go build -ldflags '-w -s'  -o $releasedir/dist/usr/local/bin/${BASE_NAME}-node ./cmd/node
 	echo "build rainbond-grctl"
 	docker run --rm -v `pwd`:${WORK_DIR} -w ${WORK_DIR} -it golang:1.8.3 go build -ldflags '-w -s'  -o $releasedir/dist/usr/local/bin/${BASE_NAME}-grctl ./cmd/grctl
 	# sed -i "s/$release_desc/0.0.0/g" ./cmd/version.go
